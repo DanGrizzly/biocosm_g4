@@ -1,0 +1,250 @@
+[gd_scene load_steps=43 format=3 uid="uid://c2i1xf4becoq0"]
+
+[ext_resource type="Script" path="res://MainSeq_MultiMeshInst.gd" id="1_gh0oe"]
+[ext_resource type="Script" path="res://scripts/TextureGenPrototype.gd" id="1_lr40v"]
+[ext_resource type="Shader" path="res://shaders/GasVolumePrototype.gdshader" id="1_wftg3"]
+[ext_resource type="CompressedTexture3D" uid="uid://e5t0rtwyb14" path="res://textures/prototype_ex1_perlin.png" id="2_bmfba"]
+[ext_resource type="Shader" path="res://shaders/Map_Star_MainSeq_QuadShader.gdshader" id="2_c2jbu"]
+[ext_resource type="Shader" path="res://shaders/GasTextureGenPrototype.gdshader" id="2_srbn2"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="3_nejq6"]
+[ext_resource type="Script" path="res://scripts/debugtext.gd" id="4_arkvk"]
+[ext_resource type="Shader" path="res://GalaxyTextureDustShader.gdshader" id="7_cr7ys"]
+[ext_resource type="Shader" path="res://GalaxyTextureDustGen.gdshader" id="7_dqpqm"]
+[ext_resource type="Script" path="res://GalaxyTextureGen.gd" id="7_l7026"]
+[ext_resource type="Shader" path="res://GalaxyTextureShader.gdshader" id="7_voyiv"]
+[ext_resource type="CompressedTexture3D" uid="uid://bybv2eerchj5q" path="res://textures/prototype_ex1_galaxy.png" id="8_4cyn6"]
+[ext_resource type="Shader" path="res://NoiseExperiments.gdshader" id="10_g1s7t"]
+[ext_resource type="CompressedTexture3D" uid="uid://bb616ohc1yjyi" path="res://textures/prototype_ex2_galaxy.png" id="11_5eqj4"]
+[ext_resource type="Shader" path="res://GalaxyTextureGen.gdshader" id="11_cnwdc"]
+[ext_resource type="Script" path="res://GalaxyTextureGen2.gd" id="11_n6wes"]
+[ext_resource type="Shader" path="res://GalaxyDustMedium.gdshader" id="11_vfmka"]
+[ext_resource type="Shader" path="res://PostProcessing.gdshader" id="16_lmoc0"]
+[ext_resource type="Shader" path="res://test.gdshader" id="20_8h4a7"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_t4vrj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7vv2"]
+render_priority = 0
+shader = ExtResource("2_c2jbu")
+shader_parameter/twinklesetting = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_epg5g"]
+material = SubResource("ShaderMaterial_p7vv2")
+size = Vector2(0.02, 0.02)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0kqh"]
+render_priority = 0
+shader = ExtResource("1_wftg3")
+shader_parameter/viewportTexture = ExtResource("2_bmfba")
+
+[sub_resource type="BoxMesh" id="BoxMesh_0tohj"]
+material = SubResource("ShaderMaterial_f0kqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3h3a6"]
+shader = ExtResource("2_srbn2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5kmny"]
+render_priority = 4
+shader = ExtResource("7_cr7ys")
+shader_parameter/viewportTexture = ExtResource("11_5eqj4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_m2g63"]
+material = SubResource("ShaderMaterial_5kmny")
+size = Vector3(100, 100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yx0pb"]
+shader = ExtResource("7_dqpqm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5g30k"]
+render_priority = 0
+shader = ExtResource("11_vfmka")
+shader_parameter/viewportTexture_1 = ExtResource("8_4cyn6")
+shader_parameter/viewportTexture_2 = ExtResource("11_5eqj4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_wawa4"]
+material = SubResource("ShaderMaterial_5g30k")
+size = Vector3(100, 100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwfr1"]
+render_priority = -1
+shader = ExtResource("7_voyiv")
+shader_parameter/viewportTexture = ExtResource("8_4cyn6")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6j2h7"]
+material = SubResource("ShaderMaterial_bwfr1")
+size = Vector3(100, 100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t7y7b"]
+shader = ExtResource("11_cnwdc")
+
+[sub_resource type="Environment" id="Environment_ovgn3"]
+background_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8coy3"]
+render_priority = 2
+shader = ExtResource("16_lmoc0")
+
+[sub_resource type="QuadMesh" id="QuadMesh_f00rp"]
+material = SubResource("ShaderMaterial_8coy3")
+size = Vector2(2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvjxl"]
+albedo_color = Color(0.972549, 0.494118, 0.698039, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_3la8i"]
+material = SubResource("StandardMaterial3D_wvjxl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dafo"]
+shader = ExtResource("10_g1s7t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37kud"]
+render_priority = 0
+shader = ExtResource("20_8h4a7")
+
+[sub_resource type="BoxMesh" id="BoxMesh_6o6ws"]
+material = SubResource("ShaderMaterial_37kud")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Galaxy Example" type="Node3D" parent="."]
+
+[node name="MM_Systems" type="Node3D" parent="Galaxy Example"]
+
+[node name="MM_Stars" type="Node3D" parent="Galaxy Example/MM_Systems"]
+
+[node name="MM_Main" type="Node3D" parent="Galaxy Example/MM_Systems/MM_Stars"]
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Galaxy Example/MM_Systems/MM_Stars/MM_Main"]
+multimesh = SubResource("MultiMesh_t4vrj")
+script = ExtResource("1_gh0oe")
+
+[node name="StarQuad_Mold" type="MeshInstance3D" parent="Galaxy Example/MM_Systems/MM_Stars/MM_Main/MultiMeshInstance3D"]
+visible = false
+mesh = SubResource("QuadMesh_epg5g")
+
+[node name="MM_Remnants" type="Node3D" parent="Galaxy Example/MM_Systems"]
+
+[node name="MM_Nebulae" type="Node3D" parent="Galaxy Example"]
+visible = false
+
+[node name="Tech_Prototyping" type="Node3D" parent="Galaxy Example/MM_Nebulae"]
+
+[node name="Example 1" type="Node3D" parent="Galaxy Example/MM_Nebulae/Tech_Prototyping"]
+
+[node name="GasMesh" type="MeshInstance3D" parent="Galaxy Example/MM_Nebulae/Tech_Prototyping/Example 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.8472)
+mesh = SubResource("BoxMesh_0tohj")
+
+[node name="SubViewport" type="SubViewport" parent="Galaxy Example/MM_Nebulae/Tech_Prototyping/Example 1"]
+size = Vector2i(128, 16384)
+render_target_update_mode = 1
+script = ExtResource("1_lr40v")
+
+[node name="ColorRect" type="ColorRect" parent="Galaxy Example/MM_Nebulae/Tech_Prototyping/Example 1/SubViewport"]
+material = SubResource("ShaderMaterial_3h3a6")
+custom_minimum_size = Vector2(128, 16384)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -16384.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MM_Media" type="Node3D" parent="Galaxy Example"]
+
+[node name="Tech_Prototyping" type="Node3D" parent="Galaxy Example/MM_Media"]
+
+[node name="Dust Example 1" type="Node3D" parent="Galaxy Example/MM_Media/Tech_Prototyping"]
+
+[node name="GalaxyDustMesh" type="MeshInstance3D" parent="Galaxy Example/MM_Media/Tech_Prototyping/Dust Example 1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+sorting_offset = -2.0
+mesh = SubResource("BoxMesh_m2g63")
+
+[node name="SubViewport" type="SubViewport" parent="Galaxy Example/MM_Media/Tech_Prototyping/Dust Example 1"]
+size = Vector2i(128, 16384)
+render_target_update_mode = 1
+script = ExtResource("11_n6wes")
+
+[node name="3DGalaxyDustGen" type="ColorRect" parent="Galaxy Example/MM_Media/Tech_Prototyping/Dust Example 1/SubViewport"]
+material = SubResource("ShaderMaterial_yx0pb")
+custom_minimum_size = Vector2(128, 16384)
+offset_right = 128.0
+offset_bottom = 16384.0
+color = Color(0.172549, 0.356863, 1, 0)
+
+[node name="GalaxyDustMediumMesh" type="MeshInstance3D" parent="Galaxy Example/MM_Media/Tech_Prototyping/Dust Example 1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_wawa4")
+
+[node name="Medium Example 1" type="Node3D" parent="Galaxy Example/MM_Media/Tech_Prototyping"]
+
+[node name="GalaxyMediumMesh" type="MeshInstance3D" parent="Galaxy Example/MM_Media/Tech_Prototyping/Medium Example 1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+sorting_offset = 1.0
+mesh = SubResource("BoxMesh_6j2h7")
+
+[node name="SubViewport" type="SubViewport" parent="Galaxy Example/MM_Media/Tech_Prototyping/Medium Example 1"]
+size = Vector2i(128, 16384)
+render_target_update_mode = 1
+script = ExtResource("7_l7026")
+
+[node name="3DGalaxyMediumGen" type="ColorRect" parent="Galaxy Example/MM_Media/Tech_Prototyping/Medium Example 1/SubViewport"]
+material = SubResource("ShaderMaterial_t7y7b")
+custom_minimum_size = Vector2(128, 16384)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -16384.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="FreeLookCamera" type="Camera3D" parent="."]
+environment = SubResource("Environment_ovgn3")
+current = true
+script = ExtResource("3_nejq6")
+
+[node name="PostProcessQuad" type="MeshInstance3D" parent="FreeLookCamera"]
+visible = false
+mesh = SubResource("QuadMesh_f00rp")
+
+[node name="Pink Torus" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("TorusMesh_3la8i")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Debug Info Rect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 1, 1, 0)
+script = ExtResource("4_arkvk")
+
+[node name="FPS_COUNTER" type="Label" parent="CanvasLayer/Debug Info Rect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="2DGalaxyShader" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_2dafo")
+custom_minimum_size = Vector2(700, 700)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ovgn3")
+
+[node name="Ball" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.60314, -1.73744, 0.482123)
+visible = false
+sorting_offset = -5.0
+mesh = SubResource("BoxMesh_6o6ws")

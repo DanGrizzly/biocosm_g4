@@ -1,0 +1,26 @@
+[remap]
+
+importer="3d_texture"
+type="CompressedTexture3D"
+uid="uid://bybv2eerchj5q"
+path="res://.godot/imported/prototype_ex1_galaxy.png-6cbcc77f04191ef56e22a6447f9204be.ctex3d"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://textures/prototype_ex1_galaxy.png"
+dest_files=["res://.godot/imported/prototype_ex1_galaxy.png-6cbcc77f04191ef56e22a6447f9204be.ctex3d"]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_compression=0
+compress/bptc_ldr=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=128
