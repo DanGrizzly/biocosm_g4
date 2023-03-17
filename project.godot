@@ -8,19 +8,9 @@
 
 config_version=5
 
-_global_script_classes=[{
-"base": "Camera3D",
-"class": &"FreeLookCamera",
-"language": &"GDScript",
-"path": "res://scripts/camera.gd"
-}]
-_global_script_class_icons={
-"FreeLookCamera": ""
-}
-
 [application]
 
-config/name="Biocosm_G4_B10"
+config/name="Biocosm_G4"
 run/main_scene="res://biocosmG4.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 run/max_fps=300
@@ -28,7 +18,12 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=2560
+window/size/viewport_height=1440
+window/size/resizable=false
 window/per_pixel_transparency/allowed=true
 window/vsync/vsync_mode=0
+
+[rendering]
+
+rendering_device/staging_buffer/texture_upload_region_size_px=256

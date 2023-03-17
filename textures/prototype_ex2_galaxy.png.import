@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/prototype_ex2_galaxy.png-d4621b767eb9f72422e0
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=0
-compress/bptc_ldr=0
 compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1

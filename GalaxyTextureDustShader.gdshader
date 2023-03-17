@@ -2,8 +2,9 @@ shader_type spatial;
 //fucker.tres
 uniform sampler3D viewportTexture;
 //uniform vec3 cameraPos;
+//uniform sampler2D DEPTH_TEXTURE : hint_depth_texture,filter_linear_mipmap;
 
-render_mode unshaded, blend_add, depth_draw_opaque, depth_prepass_alpha,
+render_mode unshaded, blend_add, depth_prepass_alpha,
 	cull_front, skip_vertex_transform;
 
 varying vec3 hitpos;
@@ -65,7 +66,7 @@ vec4 DustMarch(vec3 ro, vec3 rd, float thr, float t, inout vec3 depth_point){
 		gases += v_gases;
 		if(gases.g > break_point){
 			depth_point = p;
-			break;
+			return vec4(0.99);
 		}
 		
 		dO += dS;
@@ -83,7 +84,7 @@ void fragment(){
 	vec3 ro = (inverse(MODEL_MATRIX) * INV_VIEW_MATRIX * vec4(vec3(0), 1.0)).xyz;
 	vec3 rd = normalize(hitpos - ro);
 	
-	float thr = 0.01;
+	float thr = 0.1;
 	vec3 depth_p = vec3(0.0);
 	vec4 gas_depth = DustMarch(ro, rd, thr, TIME, depth_p);
 	
@@ -93,13 +94,14 @@ void fragment(){
 	vec3 dust_clr = normalize(vec3(1.0, 0.3, 0.0))/20.0;
 	float alpha = min(1.0, dust);
 	
+	DEPTH = 1.0;
 	if(depth_p != vec3(0.0)){
 		vec4 thing = (PROJECTION_MATRIX * VIEW_MATRIX * MODEL_MATRIX * vec4(depth_p, 1.0));
-		dust_clr = normalize(vec3(1.0, 0.0, 1.0))/3.0; //The purplening
+		//dust_clr = normalize(vec3(1.0, 0.0, 1.0))/3.0; //The purplening
 		DEPTH = (thing.z/thing.w);
 	}
-	
+	//if(alpha<1.0){discard;}
 	ALBEDO = dust_clr;
-	ALPHA = pow(alpha, 0.5);
+	ALPHA = 0.0;
 	
 }

@@ -1,6 +1,6 @@
 shader_type spatial;
-render_mode unshaded, depth_draw_never;
-
+render_mode unshaded, depth_draw_never, depth_prepass_alpha;
+uniform sampler2D DEPTH_TEXTURE : hint_depth_texture,filter_linear_mipmap;
 varying mat4 CAMERA;
 
 void vertex() {
@@ -23,6 +23,6 @@ void fragment() {
 	current.xyz /= current.w;
 	if (-current.z > -view.z){discard;}
 	
-	ALBEDO = vec3(1.0);
-	ALPHA = 0.9;
+	ALBEDO = vec3(0.1, 1.0, 0.0);
+	ALPHA = 1.0;
 }

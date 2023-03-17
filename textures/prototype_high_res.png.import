@@ -1,0 +1,27 @@
+[remap]
+
+importer="3d_texture"
+type="CompressedTexture3D"
+uid="uid://dqfi5326nt3ry"
+path.bptc="res://.godot/imported/prototype_high_res.png-be861e574b8da81f5367a1cba9227201.bptc.ctex3d"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://textures/prototype_high_res.png"
+dest_files=["res://.godot/imported/prototype_high_res.png-be861e574b8da81f5367a1cba9227201.bptc.ctex3d"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=true
+compress/lossy_quality=0.18
+compress/hdr_compression=0
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=16
+slices/vertical=16
